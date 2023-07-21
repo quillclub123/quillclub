@@ -1,0 +1,296 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css);
+body {
+    font-family: sans-serif, Calibri !important;
+}
+
+a:hover {
+    cursor:pointer;
+   }
+::-webkit-scrollbar {
+    width: 5px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #364f81;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #1f3664;
+    ;
+}
+.section-1{
+    padding-top: 50px;
+}
+img {
+    width: 100%;
+}
+ .school-logo,  .brand-logo {
+    width: 65px;
+}
+.brand-logo{
+    margin-bottom: 10px;
+}
+
+ .details p {
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+.ques-and-term{
+    display: flex;
+    justify-content: space-around;
+}
+.ques-and-term a{
+    cursor: pointer;
+    font-size: 14px;
+}
+.box-1 > *{
+    text-align: center !important;
+}
+.form-area {
+    height: 100%;
+}
+
+.form-head {
+    font-size: 1.5rem;
+}
+.form-area .nav-link, .ques-and-term .nav-link{
+    padding: 0rem 0rem;
+}
+.input-field{
+    position: relative;
+    margin-bottom: 30px;
+}
+.form-area .error {
+    font-size: 14px;
+    color: red;
+
+}
+/* .input-field label {
+    font-weight: 400;
+    font-size: 14px;
+    position: absolute;
+    left: 14px;
+    top: 24%;
+    color: black;
+    pointer-events: none;
+    user-select: none;
+    background-color: #fff;
+    transition: all .3s;
+} */
+
+.form-area input:focus, .form-area select:focus{
+    box-shadow: none;
+}
+/* .form-control:focus+label{
+    top: -25%;
+    color: #1a73e8;
+} */
+.form-area .check .form-label{
+    font-size: 12px;
+}
+.btn-linear-1{
+    /* background-image: linear-gradient(350deg, #46cf52, #a3de65); */
+    color: #fff;
+    box-shadow: 1px 1px 10px gray;
+    padding: 10px 30px !important;
+    font-size: 20px !important;
+    transition: all .5s;
+}
+
+ .btn-linear-1:hover, .mymodel .btn-linear-1:hover {
+    background-image: linear-gradient(300deg, #1f4f95, #148bbc);
+    color: #fff;
+}
+
+.select-optional label[for="yes"],
+.select-optional label[for="yes"] {
+    margin-right: 15px;
+    margin-left: 5px;
+}
+
+.admin .mymodel {
+    top: 35px;
+    text-shadow: 0px 0px 20px #fff;
+    color: black;
+}
+
+.mymodel p {
+    text-align: left !important;
+    margin: 20px 0px 0px 0px;
+    color: #333;
+    font-size: 16px;
+    line-height: 24px;
+}
+.mymodel .modal-content {
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/* .mymodel .modal-body {
+    height: 60vh;
+    overflow-y: scroll;
+} */
+
+/* @media (min-width: 576px) {
+    .mymodel .modal-dialog {
+        max-width: 600px;
+        margin: 1.75rem auto;
+    }
+} */
+.words_limit{
+    cursor:pointer;
+}
+
+.full-model { max-width: 75% !important;}
+
+.mymodel .modal-body p.head {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.mymodel .modal-body,
+.mymodel .modal-header {
+    border-bottom: 1px solid gray !important;
+}
+
+.ques-and-term a:hover,
+.form-area a:hover[data-bs-toggle="modal"] {
+    text-decoration: underline;
+}
+
+.footer-content{
+    border-top: 1px solid;
+}
+.footer-content p{
+    font-size: 12px;
+    line-height: 1.8;
+}
+@media (min-width: 1200px){
+    .bg-1 .container{
+        max-width: 1250px;
+    }
+}
+@media (max-width: 991px) {
+    .form-area {
+        margin-right: 0px;
+        padding: 20px;
+    }
+
+    .box-1 {
+        padding: 30px;
+        border-radius: 0px 0px 20px 20px;
+    }
+
+    .box-1 .image {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .school-details .content {
+        padding-left: 0px;
+    }
+
+    .box-1 p,
+    .term-link,
+    .school-name {
+        text-align: center;
+    }
+
+    .box-1 {
+        padding: 30px;
+    }
+}
+.mymodel .head{
+    color: #2e3337;
+}
+.ques-ans .headings{
+    min-height: 130px;
+    margin-bottom: 10px;
+}
+.italic{
+    font-style: italic;
+}
+p{
+    line-height: normal;
+    color: gray;
+    text-align: justify;
+}
+.f14{
+    font-size: 14px;
+}
+.ques-ans .card{
+    /* min-height: 375px;
+    max-height: 375px; */
+    /* overflow: auto; */
+    box-shadow: 4px 4px 20px 5px #dedede;
+}
+.ans-area form textarea, .img-ans-area form textarea{
+    border: none;
+    width: 100%;
+    min-height: 335px;
+    max-height: 335px;
+    overflow: auto;
+    resize: none;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+}
+/* .ans-area form textarea:focus, .img-ans-area form textarea:focus{
+    border: 1px solid gray;
+} */
+/* .img-ques-area, .img-ans-area{
+    display: none;
+} */
+.thanku-box .card{
+    box-shadow: 4px 4px 20px 5px #dedede;
+}
+.img-ans-area button, .ans-area button{
+    margin-top: 100px;
+}
+.footer-content button{
+    margin-bottom: 30px;
+}
+#agree-error{
+    margin: 0px 5px;
+}
+
+.margin_5{
+    margin-bottom: 0.8rem;
+}
+
+.light_grey{
+     background: #95949429;
+}
+
+#carouselExampleControls .carousel-control-prev-icon,
+#carouselExampleControls .carousel-control-next-icon {
+    background-image: none;
+    background-color: #198754;
+    
+}
+#carouselExampleControls .carousel-control-prev-icon i,
+#carouselExampleControls .carousel-control-next-icon i {
+    margin-top: 7px;
+}
+#carouselExampleControls .carousel-control-prev,
+#carouselExampleControls .carousel-control-next {
+    width: 4%;
+}
+/* .carousel-control-next {
+    right: 4px !important;
+} */
+@media (max-width: 576px) {
+    #carouselExampleControls .carousel-control-prev, #carouselExampleControls .carousel-control-next {
+        width: 8%;
+    }
+}
