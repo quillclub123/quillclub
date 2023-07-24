@@ -29,21 +29,29 @@ public class AnswersService {
 	public Map<String, Object> add_answer(Answers answers) {
 		Map<String, Object> response = new HashMap<String,Object>();
 		try {
-			answers.setStatus("Active");
-			answers.setCreatedAt(new Date());
-			int i = commonDao.addDataToDb(answers);
-			if (i>0) {
-				String name = answers.getEmail(); 
-				 Map<String,String> map = new HashMap<String,String>();
-					 map.put("username","##");
-					 map.put("password","quillclub"); 
-					 boolean a = email.sendEmailMessage("Answer Submition", map, name,i);
-				response.put("status","Success");
-				response.put("message", "Answer Added Successfuly");
+			String[] aw = answers.getAnswer().split(" ");
+			System.out.println("Length="+aw.length);
+			if(aw.length > 90) {
+				response.put("status","Failed");
+				response.put("message", "You can write only 90 words answer.");
 			}else {
-				response.put("status","Failure");
-				response.put("message", "Something Went Wrong");
-		}
+				answers.setStatus("Active");
+				answers.setCreatedAt(new Date());
+				int i = commonDao.addDataToDb(answers);
+				if (i>0) {
+					String name = answers.getEmail(); 
+					 Map<String,String> map = new HashMap<String,String>();
+						 map.put("username","##");
+						 map.put("password","quillclub"); 
+						 boolean a = email.sendEmailMessage("Answer Submition", map, name,i);
+					response.put("status","Success");
+					response.put("message", "Answer Added Successfuly");
+				}else {
+					response.put("status","Failure");
+					response.put("message", "Something Went Wrong");
+			}
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.put("status","Failed");

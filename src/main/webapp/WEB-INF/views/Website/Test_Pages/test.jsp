@@ -431,6 +431,12 @@ List<Information> infor = (List<Information>)request.getAttribute("infor");
 							  mapForm.appendChild(output2);
 							  document.body.appendChild(mapForm);
 							  mapForm.submit();
+					}else if(data['status'] == 'Failed'){
+						Swal.fire({
+							icon : 'warning',
+							title : 'Invalid!',
+							text : data['message']
+						}) 
 					}
 				 }
 				});
