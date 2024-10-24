@@ -15,13 +15,18 @@
 <body>
 
 <jsp:include page="../header.jsp"></jsp:include>
+<script>
+	document.getElementById('testi').classList.add('active');
+	document.getElementById('tst').style.display = 'block';
+	document.getElementById('mpi').classList.add('sidecolor');
+</script>
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">
 			<div class="col-lg-12 col-xs-12">
 			
-			<a type="button" href="addProgarmInformation" class="btn btn-primary">Add Program Information</a>
-			<a type="button" href="deletedProgramInformation" class="btn btn-danger">Deleted Programs</a>
+			<a type="button" href="addProgarmInformation" class="btn btn-primary btn-xs">Add Program Information</a>
+			<a type="button" href="deletedProgramInformation" class="btn btn-danger btn-xs">Deleted Programs</a>
 				<div class="box-content card white" style="padding-bottom: 20px;">
 					<h4 class="box-title">View Details</h4>
 					<!-- /.box-title -->

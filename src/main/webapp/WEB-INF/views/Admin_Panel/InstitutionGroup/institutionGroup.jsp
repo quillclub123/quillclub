@@ -6,11 +6,16 @@
 
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
+<script>
+	document.getElementById('glob').classList.add('active');
+	document.getElementById('glb').style.display = 'block';
+	document.getElementById('mg').classList.add('sidecolor');
+</script>
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">
 			<div class="col-lg-12 col-xs-12">
-			<a type="button" href="viewgroup" class="btn btn-primary" >view Groups</a>
+			<a type="button" href="viewgroup" class="btn btn-primary btn-xs" >view Groups</a>
 				<div class="box-content card white" style="padding-bottom: 20px;">
 					<h4 class="box-title">Add Group</h4>
 					<div class="card-content">

@@ -13,7 +13,7 @@
 	<div class="main-content">
 		<div class="row small-spacing">
 			<div class="col-lg-12 col-xs-12">
-			<a href="classes" class="btn btn-primary margin-bottom-10 waves-effect waves-light" >View Classes</a>
+			<a href="classes" class="btn btn-primary btn-xs margin-bottom-10 waves-effect waves-light" >View Classes</a>
 				<div class="box-content card white" style="padding-bottom: 20px;">
 					<h4 class="box-title">View Deleted Classes Details</h4>
 					<!-- /.box-title -->

@@ -27,11 +27,16 @@ List<Classes> data1 = (List<Classes>)request.getAttribute("data1");
 String groupName = (String)request.getAttribute("groupName");
 %>
 <jsp:include page="../header.jsp"></jsp:include>
+<script>
+	document.getElementById('glob').classList.add('active');
+	document.getElementById('glb').style.display = 'block';
+	document.getElementById('ms').classList.add('sidecolor');
+</script>
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">
 			<div class="col-lg-12 col-xs-12">
-			<a type="button" href="viewSchool" class="btn btn-primary" >view School</a>
+			<a type="button" href="viewSchool" class="btn btn-primary btn-xs" >view School</a>
 				<div class="box-content card white" style="padding-bottom: 20px;">
 					<h4 class="box-title">Add School</h4>
 					<div class="card-content">

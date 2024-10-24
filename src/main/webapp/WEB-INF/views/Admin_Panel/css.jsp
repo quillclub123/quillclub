@@ -56,17 +56,25 @@
 	.dataTables_paginate {
 		margin-top: -30px !important;
 	}
-	.button-page-length{
-		background: darkgray;
-    	padding: 6px;
-    	color: white;
+	.dt-button-collection .dropdown-menu{
+		display: grid !important;
 	}
+	.dropdown-menu .button-page-length{
+		padding: 5px !important;
+		text-align: center !important;
+	}
+	.dropdown-menu .dropdown-item:hover{
+		background: #D3D3D3 !important;
+	}
+	div.dt-button-collection .dt-button:not(.dt-btn-split-drop) {
+     min-width: 100px !important;
+}
 	.dt-button-collection{
 		width: fit-content !important;
+		padding: 0 !important;
+		text-align: center !important;
 	}
-	/* .btn-group{
-		display: none;
-	} */
+	
 	#questionTable_filter{
 		display: none;
 	}
@@ -77,5 +85,8 @@
 	.buttons-print{
 		margin-right: 4px;
     	border-radius: 2px;
+	}
+	.sidecolor{
+		background: cadetblue;
 	}
 	</style>

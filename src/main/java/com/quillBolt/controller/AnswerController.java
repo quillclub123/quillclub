@@ -52,4 +52,16 @@ public class AnswerController {
 		response = answersService.get_answerdata(sno);
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/get_shortlisted_students", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> get_shortlisted_students(HttpServletRequest request){
+		Map<String, Object> response = new HashMap<String,Object>();
+		;
+		String group_id = request.getParameter("group_id");
+		String school_id = request.getParameter("school_id");
+		String class_name = request.getParameter("class_name");
+		String section = request.getParameter("section");
+		response = answersService.get_shortlisted_students(group_id,school_id,class_name,section);
+		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+	}
 }

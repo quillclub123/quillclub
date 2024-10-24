@@ -36,7 +36,7 @@
 			
 		
 			
-			<div class="frm-footer">Lemniscate Technologies © 2023.</div>
+			<div class="frm-footer">Quill Club Writers © 2023.</div>
 			<!-- /.footer -->
 		</div>
 		<!-- .inside -->

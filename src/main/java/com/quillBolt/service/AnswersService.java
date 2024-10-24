@@ -150,5 +150,36 @@ public class AnswersService {
 		}
 		return response;
 	}
+	public Map<String, Object> get_shortlisted_students(String group_id, String school_id, String class_name,
+			String section) {
+		Map<String,Object> response = new HashMap<String, Object>();
+		try {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("group_id", Integer.parseInt(group_id));
+			if(school_id != null && !school_id.isEmpty()) {
+				map.put("school_id", Integer.parseInt(school_id));
+			}
+			if(class_name != null && !class_name.isEmpty()) {
+				map.put("class_name", class_name);
+			}
+			if(!section.equalsIgnoreCase("null") && !section.isEmpty()) {
+				map.put("section", section);
+			}
+			map.put("status", "Active");
+			List<Answers> data = (List<Answers>)commonDao.getDataByMap(map, new Answers(), null, null, 0, -1);
+			if(data.size() > 0 ) {
+				response.put("data", data);
+				response.put("status", "Success");
+				response.put("message", "Data fetch successfully");
+			}else {
+				response.put("status", "Failed");
+				response.put("message", "Something went wrong");
+			}
+			
+		}catch(Exception e) {
+			
+		}
+		return response;
+	}
 
 }

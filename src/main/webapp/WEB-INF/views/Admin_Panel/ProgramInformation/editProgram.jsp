@@ -25,6 +25,11 @@ List<ProgramInformation> data = (List<ProgramInformation>)request.getAttribute("
 List<InstituitonGroup> data2 = (List<InstituitonGroup>)request.getAttribute("data2");
 %>
 <jsp:include page="../header.jsp"></jsp:include>
+<script>
+	document.getElementById('testi').classList.add('active');
+	document.getElementById('tst').style.display = 'block';
+	document.getElementById('mpi').classList.add('sidecolor');
+</script>
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">

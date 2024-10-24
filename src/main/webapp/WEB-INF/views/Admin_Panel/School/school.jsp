@@ -16,12 +16,17 @@
 <%List<InstituitonGroup> data = (List<InstituitonGroup>)request.getAttribute("data"); %>
 
 <jsp:include page="../header.jsp"></jsp:include>
+<script>
+	document.getElementById('glob').classList.add('active');
+	document.getElementById('glb').style.display = 'block';
+	document.getElementById('ms').classList.add('sidecolor');
+</script>
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">
 			<div class="col-lg-12 col-xs-12">
-			<button type="button" id="clear_btn" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#school_model">Add School</button>
-			<a type="button" href="viewDeletedSchool" class="btn btn-danger">Deleted Schools</a>
+			<button type="button" id="clear_btn" class="btn btn-primary btn-xs waves-effect waves-light" data-toggle="modal" data-target="#school_model">Add School</button>
+			<a type="button" href="viewDeletedSchool" class="btn btn-danger btn-xs">Deleted Schools</a>
 				<div class="box-content card white" style="padding-bottom: 20px;">
 					<h4 class="box-title">View Schools</h4>
 					<!-- /.box-title -->

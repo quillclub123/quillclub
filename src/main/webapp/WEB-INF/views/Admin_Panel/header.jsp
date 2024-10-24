@@ -18,36 +18,81 @@
 		<div class="navigation">
 			<!-- /.title -->
 			<ul class="menu js__accordion">
-				<li class="current">
+				<li id="dash">
 					<a class="waves-effect" href="dashboard?email=<%=loginData.getEmail()%>"><i class="menu-icon fa fa-home"></i><span>Dashboard</span></a>
 				</li>
-				<li>
+				<hr style="margin: 0;">
+				<li id="glob">
+				    <a class="waves-effect parent-item js__control" href="#">
+				        <i class="menu-icon fa fa-globe"></i>
+				        <span>Global</span>
+				        <span class="menu-arrow fa fa-angle-down"></span>
+				    </a>
+				    <ul id="glb" class="sub-menu js__content">
+				        <li id="mg"><a href="viewgroup">Manage Groups</a></li>
+				        <li id="ms"><a href="schools">Manage Schools</a></li>
+				        <li id="mss"><a href="section">Manage Sections</a></li>
+				    </ul>
+				</li>
+				<hr style="margin: 0;">
+				<li id="testi">
+				    <a class="waves-effect parent-item js__control" href="#">
+				        <i class="menu-icon fa fa-indent"></i>
+				        <span>Testing</span>
+				        <span class="menu-arrow fa fa-angle-down"></span>
+				    </a>
+				    <ul id="tst" class="sub-menu js__content">
+				        <li id="mmt"><a href="mailTemplate">Manage Mail Template</a></li>
+				        <li id="tib"><a href="top_image_banner">Top Image Banner</a></li>
+				        <li id="mqi"><a href="information">Manage QCW Info</a></li>
+				        <li id="mqb"><a href="question">Manage Question Bank </a></li>
+				        <li id="mpi"><a href="progarmInformation">Manage Program Info </a></li>
+				        <li id="msq"><a href="sample_question">Manage Sample Question </a></li>
+				        <li id="msa"><a href="sample_answer">Manage Sample Answer </a></li>
+				        <li id="ma"><a href="viewAnswers">Manage Answers </a></li>
+				    </ul>
+				</li>
+				<hr style="margin: 0;">
+				<li id="writ">
+				    <a class="waves-effect parent-item js__control" href="#">
+				        <i class="menu-icon fa fa-pencil-square-o"></i>
+				        <span>Writing</span>
+				        <span class="menu-arrow fa fa-angle-down"></span>
+				    </a>
+				    <ul id="wrt" class="sub-menu js__content">
+				        <li id="ss"><a href="manage_selected_students">Selected Students</a></li>
+				        <li id="apqs"><a href="manage_profile_questions">Auth Prof Questions</a></li>
+				        <li id="er"><a href="edit_review">Edit Review</a></li>
+				    </ul>
+				</li>
+				<hr style="margin: 0;">
+				<!-- <li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-envelope"></i><span>Mail Template</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
 						<li><a href="mailTemplate">Manage</a></li>
 					</ul>
-					<!-- /.sub-menu js__content -->
+					
 				</li>
 				<li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-upload"></i><span>Top Image Banner</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
 						<li><a href="top_image_banner">Manage</a></li>
 					</ul>
-					<!-- /.sub-menu js__content -->
+					
 				</li>
 				<li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-info"></i><span>QCW Info</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
 						<li><a href="information">Manage</a></li>
 					</ul>
-					<!-- /.sub-menu js__content -->
+					
 				</li>
 				<li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-database"></i><span>Groups</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
 						<li><a href="viewgroup">Manage</a></li>
 					</ul>
-					<!-- /.sub-menu js__content -->
+					
 				</li>
 				<li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-graduation-cap"></i><span>Schools</span><span class="menu-arrow fa fa-angle-down"></span></a>
@@ -55,16 +100,8 @@
 						 <li><a href="schools">Manage</a></li>
 						
 					</ul>
-					<!-- /.sub-menu js__content -->
+					
 				</li>
-<!-- 				<li>
-					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-child"></i><span>Classes</span><span class="menu-arrow fa fa-angle-down"></span></a>
-					<ul class="sub-menu js__content">
-						<li><a href="classes">Classes Details</a></li>
-						
-					</ul>
-					/.sub-menu js__content
-				</li> -->
 				 <li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-folder-open"></i><span>Section</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
@@ -78,7 +115,7 @@
 						 <li><a href="question">Manage</a></li>
 						
 					</ul>
-					<!-- /.sub-menu js__content -->
+					
 				</li>
 				
 				<li>
@@ -87,7 +124,7 @@
 						<li><a href="progarmInformation">Manage</a></li>
 						
 					</ul>
-					<!-- /.sub-menu js__content -->
+					
 				</li>
 				<li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-question-circle"></i><span>Sample</span><span class="menu-arrow fa fa-angle-down"></span></a>
@@ -96,25 +133,38 @@
 						 <li><a href="sample_answer">Add Answer</a></li>
 						
 					</ul>
-					<!-- /.sub-menu js__content -->
+					
 				</li>
-				<!-- <li>
-					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-paperclip"></i><span> Set Papers</span><span class="menu-arrow fa fa-angle-down"></span></a>
-					<ul class="sub-menu js__content">
-						 <li><a href="addPaper">Set Paper</a></li>
-						 <li><a href="viewPaper">View Paper</a></li>
-						
-					</ul>
-				</li> -->
 				<li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-file-text-o"></i><span>Answers</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
 						 <li><a href="viewAnswers">View Answers</a></li>
-						<!--  <li><a href="viewPaper">View Paper</a></li> -->
 						
 					</ul>
 				</li>
+				<li>
+					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-list-alt"></i><span>Selected Students</span><span class="menu-arrow fa fa-angle-down"></span></a>
+					<ul class="sub-menu js__content">
+						 <li><a href="manage_selected_students">Manage</a></li>
+						
+					</ul>
+				</li>
+				<li>
+					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-list-alt"></i><span>Auth Prof Questions</span><span class="menu-arrow fa fa-angle-down"></span></a>
+					<ul class="sub-menu js__content">
+						 <li><a href="manage_profile_questions">Manage</a></li>
 				
+						
+					</ul>
+				</li>
+				<li>
+					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-list-alt"></i><span>Edit Review</span><span class="menu-arrow fa fa-angle-down"></span></a>
+					<ul class="sub-menu js__content">
+						 <li><a href="edit_review">Manage</a></li>
+						
+						
+					</ul>
+				</li> -->
 			</ul>
 			<!-- /.menu js__accordion -->
 		</div>
@@ -127,7 +177,7 @@
 <div class="fixed-navbar">
 	<div class="pull-left">
 		<button type="button" class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>
-		<h1 class="page-title">Home</h1>
+		<!-- <h1 class="page-title">Home</h1> -->
 		<!-- /.page-title -->
 	</div>
 	<!-- /.pull-left -->
@@ -147,171 +197,3 @@
 </div>
 <!-- /.fixed-navbar -->
 
-<div id="notification-popup" class="notice-popup js__toggle" data-space="75">
-	<h2 class="popup-title">Your Notifications</h2>
-	<!-- /.popup-title -->
-	<div class="content">
-		<ul class="notice-list">
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">John Doe</span>
-					<span class="desc">Like your post: “Contact Form 7 Multi-Step”</span>
-					<span class="time">10 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">Anna William</span>
-					<span class="desc">Like your post: “Facebook Messenger”</span>
-					<span class="time">15 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar bg-warning"><i class="fa fa-warning"></i></span>
-					<span class="name">Update Status</span>
-					<span class="desc">Failed to get available update data. To ensure the please contact us.</span>
-					<span class="time">30 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/128x128" alt=""></span>
-					<span class="name">Jennifer</span>
-					<span class="desc">Like your post: “Contact Form 7 Multi-Step”</span>
-					<span class="time">45 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">Michael Zenaty</span>
-					<span class="desc">Like your post: “Contact Form 7 Multi-Step”</span>
-					<span class="time">50 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">Simon</span>
-					<span class="desc">Like your post: “Facebook Messenger”</span>
-					<span class="time">1 hour</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar bg-violet"><i class="fa fa-flag"></i></span>
-					<span class="name">Account Contact Change</span>
-					<span class="desc">A contact detail associated with your account has been changed.</span>
-					<span class="time">2 hours</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">Helen 987</span>
-					<span class="desc">Like your post: “Facebook Messenger”</span>
-					<span class="time">Yesterday</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/128x128" alt=""></span>
-					<span class="name">Denise Jenny</span>
-					<span class="desc">Like your post: “Contact Form 7 Multi-Step”</span>
-					<span class="time">Oct, 28</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">Thomas William</span>
-					<span class="desc">Like your post: “Facebook Messenger”</span>
-					<span class="time">Oct, 27</span>
-				</a>
-			</li>
-		</ul>
-		<!-- /.notice-list -->
-		<a href="#" class="notice-read-more">See more messages <i class="fa fa-angle-down"></i></a>
-	</div>
-	<!-- /.content -->
-</div>
-<!-- /#notification-popup -->
-
-<div id="message-popup" class="notice-popup js__toggle" data-space="75">
-	<h2 class="popup-title">Recent Messages<a href="#" class="pull-right text-danger">New message</a></h2>
-	<!-- /.popup-title -->
-	<div class="content">
-		<ul class="notice-list">
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">John Doe</span>
-					<span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-					<span class="time">10 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">Harry Halen</span>
-					<span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-					<span class="time">15 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">Thomas Taylor</span>
-					<span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-					<span class="time">30 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/128x128" alt=""></span>
-					<span class="name">Jennifer</span>
-					<span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-					<span class="time">45 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-					<span class="name">Helen Candy</span>
-					<span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-					<span class="time">45 min</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/128x128" alt=""></span>
-					<span class="name">Anna Cavan</span>
-					<span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-					<span class="time">1 hour ago</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar bg-success"><i class="fa fa-user"></i></span>
-					<span class="name">Jenny Betty</span>
-					<span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-					<span class="time">1 day ago</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<span class="avatar"><img src="http://placehold.it/128x128" alt=""></span>
-					<span class="name">Denise Peterson</span>
-					<span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-					<span class="time">1 year ago</span>
-				</a>
-			</li>
-		</ul>
-		<!-- /.notice-list -->
-		<a href="#" class="notice-read-more">See more messages <i class="fa fa-angle-down"></i></a>
-	</div>
-	<!-- /.content -->
-</div>

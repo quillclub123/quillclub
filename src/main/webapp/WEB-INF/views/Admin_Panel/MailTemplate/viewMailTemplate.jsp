@@ -12,11 +12,16 @@
 
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
+<script>
+	document.getElementById('testi').classList.add('active');
+	document.getElementById('tst').style.display = 'block';
+	document.getElementById('mmt').classList.add('sidecolor');
+</script>
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">
 			<div class="col-lg-12 col-xs-12">
-			<a type="button" href="addMailTemplate" class="btn btn-primary">Add Mail Template</a>
+			<a type="button" href="addMailTemplate" class="btn btn-primary btn-xs">Add Mail Template</a>
 				<div class="box-content card white" style="padding-bottom: 20px;">
 					<h4 class="box-title">View Mail Template</h4>
 					<!-- /.box-title -->

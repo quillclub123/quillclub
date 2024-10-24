@@ -3,6 +3,8 @@ package com.quillBolt.controller;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +28,7 @@ import com.google.gson.Gson;
 import com.quillBolt.model.Classes;
 import com.quillBolt.model.InstituitonGroup;
 import com.quillBolt.service.InstitutionGroupService;
+import com.quillBolt.utils.Utils;
 
 @Controller
 public class InstitutionGroupController {
@@ -89,7 +93,7 @@ public class InstitutionGroupController {
 			public ResponseEntity<byte[]> getdocumentcourse(HttpServletRequest request) throws IOException {
 				String url = request.getParameter("url");
 				
-				String path = com.quillBolt.utils.Utils.staticimages;
+				String path = Utils.staticimages;
 				HttpHeaders headers = new HttpHeaders();
 				InputStream in = null;
 				try {
@@ -102,4 +106,37 @@ public class InstitutionGroupController {
 				ResponseEntity<byte[]> responseEntity = new ResponseEntity(media, headers, HttpStatus.OK);
 				return responseEntity;
 			}
+	@RequestMapping(value = "/your_pdf", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> getDocument1(HttpServletRequest request) throws IOException {
+	    String url = request.getParameter("url");
+	    String path = Utils.staticimages;
+	    
+	    // Determine the file's content type based on its extension
+	    String fileType = Files.probeContentType(Paths.get(path + url));
+	    if (fileType == null) {
+	        fileType = "application/octet-stream"; // Default binary type if unknown
+	    }
+
+	    HttpHeaders headers = new HttpHeaders();
+	    InputStream in = null;
+	    byte[] media = null;
+
+	    try {
+	        in = new FileInputStream(path + url);
+	        media = IOUtils.toByteArray(in);
+	    } catch (Exception e) {
+	        System.out.println(e);
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    } finally {
+	        if (in != null) {
+	            in.close();
+	        }
+	    }
+
+	    headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+	    headers.setContentType(MediaType.parseMediaType(fileType));
+
+	    return new ResponseEntity<>(media, headers, HttpStatus.OK);
+	}
+
 }

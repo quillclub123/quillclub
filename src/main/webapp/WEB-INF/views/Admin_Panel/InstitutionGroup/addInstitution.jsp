@@ -6,12 +6,17 @@
 
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
+<script>
+	document.getElementById('glob').classList.add('active');
+	document.getElementById('glb').style.display = 'block';
+	document.getElementById('mg').classList.add('sidecolor');
+</script>
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">
 			<div class="col-lg-12 col-xs-12">
-			<button type="button" id="clear_btn" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#group_model">Add Group</button>
-			<a type="button" href="deletedGroup" class="btn btn-danger">Deleted Groups</a>
+			<button type="button" id="clear_btn" class="btn btn-primary btn-xs waves-effect waves-light" data-toggle="modal" data-target="#group_model">Add Group</button>
+			<a type="button" href="deletedGroup" class="btn btn-danger btn-xs">Deleted Groups</a>
 				<div class="box-content card white" style="padding-bottom: 20px;">
 					<h4 class="box-title">View Groups</h4>
 					<!-- /.box-title -->

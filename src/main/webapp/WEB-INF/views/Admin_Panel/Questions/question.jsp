@@ -108,12 +108,17 @@ height : 40px !important;
 
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
+<script>
+	document.getElementById('testi').classList.add('active');
+	document.getElementById('tst').style.display = 'block';
+	document.getElementById('mqb').classList.add('sidecolor');
+</script>
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">
 			<div class="col-lg-12 col-xs-12">
-			<button type="button" id="clear_btn" class="btn btn-primary margin-bottom-10 waves-effect waves-light" data-toggle="modal" data-target="#question_model">Add Question</button>
-			<a href="deletedQuestion"  class="btn btn-danger margin-bottom-10 waves-effect waves-light" >Deleted Questions</a>
+			<button type="button" id="clear_btn" class="btn btn-primary btn-xs margin-bottom-10 waves-effect waves-light" data-toggle="modal" data-target="#question_model">Add Question</button>
+			<a href="deletedQuestion"  class="btn btn-danger btn-xs margin-bottom-10 waves-effect waves-light" >Deleted Questions</a>
 				<div class="box-content card white" style="padding-bottom: 20px;">
 					<h4 class="box-title">View Questions</h4>
 					<!-- /.box-title -->

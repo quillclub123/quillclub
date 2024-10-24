@@ -127,8 +127,7 @@ body{
                Sorry, the page you're looking for doesn't exist. If you think something is broken, report a problem.
             </p>
             <div class="btns">
-               <a href="https://www.codingnepalweb.com/">return home</a>
-               <a href="https://www.codingnepalweb.com/">report problem</a>
+               <a href="https://paper.quillclubwriters.com/">return home</a>
             </div>
          </div>
       </div>

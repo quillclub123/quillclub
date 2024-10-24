@@ -18,6 +18,7 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
@@ -260,5 +261,71 @@ public class CommonDao {
 		return distinctDataList;
     }
 
+	public void deleteAuthorQuestionAnswer(int  apq_id) {
+		Session session = null;
+		Transaction tx = null;
+		try {
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			String hqlDelete = "DELETE FROM ProfileQuestionsAnswer WHERE apq_id = "+apq_id+"";
+			Query deleteQuery = session.createQuery(hqlDelete);
+			int rowCount = deleteQuery.executeUpdate();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
+	public void deleteStructureDescription(int sno) {
+		Session session = null;
+		Transaction tx = null;
+		try {
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			String hqlDelete = "DELETE FROM StructureDescription WHERE structure_id = "+sno+"";
+			Query deleteQuery = session.createQuery(hqlDelete);
+			int rowCount = deleteQuery.executeUpdate();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+	}
+	public void deleteprofilquestion(int q_id) {
+		Session session = null;
+		Transaction tx = null;
+		try {
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			String hqlDelete = "DELETE FROM QuestionList WHERE q_id = "+q_id+"";
+			Query deleteQuery = session.createQuery(hqlDelete);
+			int rowCount = deleteQuery.executeUpdate();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+	}
 
 }

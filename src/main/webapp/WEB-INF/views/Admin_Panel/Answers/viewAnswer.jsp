@@ -30,6 +30,11 @@ List<String> name = (List<String>)request.getAttribute("name");
 List<Date> createdAt = (List<Date>)request.getAttribute("createdAt");
 %>
 <jsp:include page="../header.jsp"></jsp:include>
+<script>
+	document.getElementById('testi').classList.add('active');
+	document.getElementById('tst').style.display = 'block';
+	document.getElementById('ma').classList.add('sidecolor');
+</script>
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">

@@ -27,20 +27,35 @@ import com.google.gson.Gson;
 import com.quillBolt.dao.CommonDao;
 import com.quillBolt.model.AdminLogin;
 import com.quillBolt.model.Answers;
+import com.quillBolt.model.AuthorProfileQuestion;
 import com.quillBolt.model.Banner;
 import com.quillBolt.model.Classes;
+import com.quillBolt.model.DraftPassage;
+import com.quillBolt.model.DraftStory;
+import com.quillBolt.model.DraftStoryIdea;
+import com.quillBolt.model.DraftedReflections;
 import com.quillBolt.model.Information;
 import com.quillBolt.model.InstituitonGroup;
 import com.quillBolt.model.MailTemplate;
 import com.quillBolt.model.Paper;
+import com.quillBolt.model.Passage;
+import com.quillBolt.model.ProfileQuestions;
+import com.quillBolt.model.ProfileQuestionsAnswer;
 import com.quillBolt.model.ProgramInformation;
 import com.quillBolt.model.QuestionClassWise;
+import com.quillBolt.model.QuestionList;
 import com.quillBolt.model.QuestionPaper;
 import com.quillBolt.model.Questions;
+import com.quillBolt.model.Reflections;
 import com.quillBolt.model.SampleAnswer;
 import com.quillBolt.model.SampleQuestion;
 import com.quillBolt.model.Schools;
 import com.quillBolt.model.Section;
+import com.quillBolt.model.SelectedStudent;
+import com.quillBolt.model.Story;
+import com.quillBolt.model.StoryIdea;
+import com.quillBolt.model.Structure;
+import com.quillBolt.model.StructureDescription;
 import com.quillBolt.service.ClassesService;
 import com.quillBolt.service.InstitutionGroupService;
 
@@ -120,12 +135,30 @@ public class HomeController {
 		List<AdminLogin> loginData = (List<AdminLogin>)commonDao.getDataByMap(map,new AdminLogin(), null, null , 0, -1);
 		if(loginData.size() > 0) {
 			ModelAndView mv =  new ModelAndView("Admin_Panel/Dashboard/dashboard");
+			List<SelectedStudent> st = (List<SelectedStudent>)commonDao.getDataByMap(new HashMap<String,Object>(), new SelectedStudent(), "sno", "desc", 0, -1);
+			if(st.size()> 0) {
+				for(int i =0; i <st.size(); i++) {
+					Map<String, Object> map1 = new HashMap<String,Object>();
+					map1.put("sno", st.get(i).getGroup_id());
+					List<InstituitonGroup> data = (List<InstituitonGroup>)commonDao.getDataByMap(map1, new InstituitonGroup(), null, null, 0, -1);
+					st.get(i).setGroup_name(data.get(0).getInstitution_group());
+					
+					Map<String, Object> map2 = new HashMap<String,Object>();
+					map2.put("sno", st.get(i).getSchool_id());
+					List<Schools> data1 = (List<Schools>)commonDao.getDataByMap(map2, new Schools(), null, null, 0, -1);
+					st.get(i).setSchool_name(data1.get(0).getSchool_name());
+				}
+			}
+			Map<String,Object> map1 = new HashMap<String,Object>();
+			map1.put("status", "Active");
+			List<InstituitonGroup> data = (List<InstituitonGroup>)commonDao.getDataByMap(map1, new InstituitonGroup(), null, null, 0, -1);
+			mv.addObject("data", data);
 			session.setAttribute("loginData", loginData.get(0));
 			session.setAttribute("email", email);
-			
+			mv.addObject("st", st);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -147,7 +180,7 @@ public class HomeController {
 	@RequestMapping(value = "/logout")
 	public ModelAndView logout(HttpServletRequest request,HttpSession session,HttpServletResponse response) {
 		session.invalidate();		
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:./");
 	}
 	@RequestMapping(value="/testInformation")
 	public ModelAndView testInformation(HttpServletRequest request) throws IOException{
@@ -238,7 +271,7 @@ public class HomeController {
 			ModelAndView mv =  new ModelAndView("Admin_Panel/InstitutionGroup/institutionGroup");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -250,7 +283,7 @@ public class HomeController {
 			ModelAndView mv =  new ModelAndView("Admin_Panel/InstitutionGroup/deletedGroup");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -261,7 +294,7 @@ public class HomeController {
 			ModelAndView mv =  new ModelAndView("Admin_Panel/Quill_Club_Info/quillClubInfo");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -277,7 +310,7 @@ public class HomeController {
 			mv.addObject("data", data);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -289,7 +322,7 @@ public class HomeController {
 			ModelAndView mv =  new ModelAndView("Admin_Panel/InstitutionGroup/addInstitution");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 	}
 	@RequestMapping(value="/mailTemplate")
@@ -300,7 +333,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/MailTemplate/viewMailTemplate");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -313,7 +346,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/MailTemplate/mailTemplate");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -329,7 +362,7 @@ public class HomeController {
 			mv.addObject("data", data);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -344,7 +377,7 @@ public class HomeController {
 			mv.addObject("data", data);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -356,7 +389,7 @@ public class HomeController {
 		
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -368,7 +401,7 @@ public class HomeController {
 			
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -383,7 +416,7 @@ public class HomeController {
 			mv.addObject("data", data);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -409,7 +442,7 @@ public class HomeController {
 			mv.addObject("data", data);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -420,7 +453,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/School/deletedSchools");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -446,7 +479,7 @@ public class HomeController {
 			
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -459,7 +492,7 @@ public class HomeController {
 			mv.addObject("data", data);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -470,7 +503,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/Classes/deletedClass");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -483,7 +516,7 @@ public class HomeController {
 			mv.addObject("data", data);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -494,7 +527,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/Sections/deletedSection");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -505,7 +538,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/Questions/question");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -516,7 +549,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/Questions/deletedQuestion");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -529,7 +562,7 @@ public class HomeController {
 			mv.addObject("data", data);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -540,7 +573,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/Sample/sampleQuestion");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -551,7 +584,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/Sample/sampleAnswer");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -562,7 +595,7 @@ public class HomeController {
 			ModelAndView mv = new ModelAndView("Admin_Panel/UploadBanner/uploadBanner");
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -608,7 +641,7 @@ public class HomeController {
 			mv.addObject("name", data8);
 			return mv;
 		}else {
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:./");
 		}
 		
 	}
@@ -650,4 +683,238 @@ public class HomeController {
 		Map<String, Object> response =classesService.updatemailTemplate(mailtemplate);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+	@RequestMapping(value="/manage_selected_students")
+	public ModelAndView selected(HttpServletRequest request, HttpSession session) throws IOException{
+		AdminLogin loginData = (AdminLogin)session.getAttribute("loginData");
+		if(loginData != null) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("status", "Active");
+			List<InstituitonGroup> data = (List<InstituitonGroup>)commonDao.getDataByMap(map, new InstituitonGroup(), null, null, 0, -1);
+			ModelAndView mv = new ModelAndView("Admin_Panel/Selected_Student/selected");
+			mv.addObject("data", data);
+			return mv;
+		}else {
+			return new ModelAndView("redirect:./");
+		}
+		
+	}
+	@RequestMapping(value="/manage_profile_questions")
+	public ModelAndView manage_profile_questions(HttpServletRequest request, HttpSession session) throws IOException{
+		AdminLogin loginData = (AdminLogin)session.getAttribute("loginData");
+		if(loginData != null) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("status", "Active");
+			List<InstituitonGroup> data = (List<InstituitonGroup>)commonDao.getDataByMap(map, new InstituitonGroup(), null, null, 0, -1);
+			ModelAndView mv = new ModelAndView("Admin_Panel/Profile_Questions/question");
+			mv.addObject("data", data);
+			return mv;
+		}else {
+			return new ModelAndView("redirect:./");
+		}
+		
+	}
+	@RequestMapping(value="/edit_review")
+	public ModelAndView editorial_reviewed(HttpServletRequest request, HttpSession session) throws IOException{
+		AdminLogin loginData = (AdminLogin)session.getAttribute("loginData");
+		if(loginData != null) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("status", "Active");
+			List<InstituitonGroup> data = (List<InstituitonGroup>)commonDao.getDataByMap(map, new InstituitonGroup(), null, null, 0, -1);
+			ModelAndView mv = new ModelAndView("Admin_Panel/Editorial_Reviewed/reviewed_pdf");
+			mv.addObject("data", data);
+			return mv;
+		}else {
+			return new ModelAndView("redirect:./");
+		}
+		
+	}
+//	@RequestMapping(value="/")
+//	public ModelAndView aulogin(HttpServletRequest request) throws IOException{
+//		ModelAndView mv = new ModelAndView("AuthorWeb/Login/login");
+//		return mv;
+//	}
+	@RequestMapping(value="/index")
+	public ModelAndView index(HttpServletRequest request,HttpSession session) throws IOException{
+		String student_id = request.getParameter("student_id");
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("studenyt_id", student_id);
+		map.put("status", "Active");
+		List<SelectedStudent> st = (List<SelectedStudent>)commonDao.getDataByMap(map, new SelectedStudent(), null, null, 0, -1);
+		if(st.size() >0) {
+			ModelAndView mv = new ModelAndView("AuthorWeb/autherPage/index");
+			return mv;
+		}else {
+			return new ModelAndView("AuthorWeb/Login/login");
+		}
+	}
+	
+	@RequestMapping(value="/author_profile")
+	public ModelAndView author_profile(HttpServletRequest request, HttpSession session) throws IOException{
+		String student_id = request.getParameter("student_id");
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("student_id", student_id);
+		map.put("status", "Active");
+		List<SelectedStudent> st = (List<SelectedStudent>)commonDao.getDataByMap(map, new SelectedStudent(), null, null, 0, -1);
+		if(st.size() >0) {
+			Map<String,Object> mp = new HashMap<String, Object>();
+			mp.put("sno", st.get(0).getSchool_id());
+			List<Schools> sc = (List<Schools>)commonDao.getDataByMap(mp, new Schools(), null, null, 0, -1);
+			st.get(0).setSchool_name(sc.get(0).getSchool_name()+" "+sc.get(0).getBranch());
+			ModelAndView mv = new ModelAndView("AuthorWeb/Author_profile/author_profile");
+			Map<String,Object> map1 = new HashMap<String, Object>();
+			map1.put("group_id", st.get(0).getGroup_id());
+			map1.put("school_id", st.get(0).getSchool_id());
+			List<ProfileQuestions> pq = (List<ProfileQuestions>)commonDao.getDataByMap(map1, new ProfileQuestions(), null, null, 0, -1);
+			List<QuestionList> ql = new ArrayList<QuestionList>();
+			List<AuthorProfileQuestion> aql = new ArrayList<AuthorProfileQuestion>();
+			List<AuthorProfileQuestion> apq = (List<AuthorProfileQuestion>)commonDao.getDataByMap(map, new AuthorProfileQuestion(), null, null, 0, -1);
+			if(apq.size() > 0) {
+				aql.addAll(apq);
+			}
+			if(pq.size() > 0) {
+				Map<String,Object> map2 = new HashMap<String, Object>();
+				map2.put("q_id", pq.get(0).getSno());
+				 ql = (List<QuestionList>)commonDao.getDataByMap(map2, new QuestionList(), "seq_no", "desc", 0, -1);
+			}
+			Map<String,Object> mapp = new HashMap<String, Object>();
+			mapp.put("student_id", student_id);
+			List<DraftPassage> dp = (List<DraftPassage>)commonDao.getDataByMap(mapp, new DraftPassage(), null, null, 0, -1);
+			mv.addObject("dp", dp);
+			mv.addObject("qlist", ql);
+			mv.addObject("apq", aql);
+			session.setAttribute("student_data", st.get(0));
+			return mv;
+		}else {
+			return new ModelAndView("redirect:./");
+		}
+	}
+	@RequestMapping(value="/manage_story_idea")
+	public ModelAndView manage_story_idea(HttpServletRequest request, HttpSession session) throws IOException{
+		SelectedStudent ss = (SelectedStudent)session.getAttribute("student_data");
+		if(ss != null) {
+			ModelAndView mv = new ModelAndView("AuthorWeb/Story_Idea/story_idea");
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("student_id", ss.getStudent_id());
+			//map.put("status", "Active");
+			List<DraftStoryIdea> ds = (List<DraftStoryIdea>)commonDao.getDataByMap(map, new DraftStoryIdea(), null, null, 0, -1);
+			List<StoryIdea> si = (List<StoryIdea>)commonDao.getDataByMap(map, new StoryIdea(), null, null, 0, -1);
+			mv.addObject("ds", ds);
+			mv.addObject("si", si);
+			return mv;
+		}else {
+			return new ModelAndView("redirect:./");
+		}
+	}
+	@RequestMapping(value="/manage_structure")
+	public ModelAndView manage_structure(HttpServletRequest request, HttpSession session) throws IOException{
+		SelectedStudent ss = (SelectedStudent)session.getAttribute("student_data");
+		if(ss != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("student_id", ss.getStudent_id());
+			List<Structure> structures = (List<Structure>)commonDao.getDataByMap(map, new Structure(), null, null, 0, -1);
+			ModelAndView mv = new ModelAndView("AuthorWeb/Structure/structure");
+			mv.addObject("structures", structures);
+			return mv;
+		}else {
+			return new ModelAndView("redirect:./");
+		}
+		
+	}
+	@RequestMapping(value="/manage_full_story")
+	public ModelAndView manage_full_story(HttpServletRequest request, HttpSession session) throws IOException{
+		SelectedStudent ss = (SelectedStudent)session.getAttribute("student_data");
+		if(ss != null) {
+			ModelAndView mv = new ModelAndView("AuthorWeb/Full_Story/full_story");
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("student_id", ss.getStudent_id());
+			//map.put("status", "Active");
+			List<DraftStory> ds = (List<DraftStory>)commonDao.getDataByMap(map, new DraftStory(), null, null, 0, -1);
+			List<Story> si = (List<Story>)commonDao.getDataByMap(map, new Story(), null, null, 0, -1);
+			mv.addObject("ds", ds);
+			mv.addObject("si", si);
+			return mv;
+		}else {
+			return new ModelAndView("redirect:./");
+		}
+		
+	}
+	@RequestMapping(value="/reflections")
+	public ModelAndView reflections(HttpServletRequest request, HttpSession session) throws IOException{
+		SelectedStudent ss = (SelectedStudent)session.getAttribute("student_data");
+		if(ss != null) {
+			ModelAndView mv = new ModelAndView("AuthorWeb/Reflections/reflections");
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("student_id", ss.getStudent_id());
+			//map.put("status", "Active");
+			List<DraftedReflections> ds = (List<DraftedReflections>)commonDao.getDataByMap(map, new DraftedReflections(), null, null, 0, -1);
+			List<Reflections> si = (List<Reflections>)commonDao.getDataByMap(map, new Reflections(), null, null, 0, -1);
+			mv.addObject("ds", ds);
+			mv.addObject("si", si);
+			return mv;
+		}else {
+			return new ModelAndView("redirect:./");
+		}
+	}
+	@RequestMapping(value="/editorial_review")
+	public ModelAndView review_pdf(HttpServletRequest request,HttpSession session) throws IOException{
+		SelectedStudent ss = (SelectedStudent)session.getAttribute("student_data");
+		if(ss != null) {
+			ModelAndView mv = new ModelAndView("AuthorWeb/Pdf/reviewpdf");
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("student_id", ss.getStudent_id());
+			List<SelectedStudent> st = (List<SelectedStudent>)commonDao.getDataByMap(map, new SelectedStudent(), null, null, 0, -1);
+			mv.addObject("stt", st);
+			return mv;
+		}else {
+			return new ModelAndView("redirect:./");
+		}
+		
+	}
+	@RequestMapping(value="/story_data")
+	public ModelAndView story_data(HttpServletRequest request) throws IOException{
+		String student_id = request.getParameter("student_id");
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("student_id", student_id);
+		List<SelectedStudent> ss = (List<SelectedStudent>)commonDao.getDataByMap(map, new SelectedStudent(), null, null, 0, -1);
+		Map<String,Object> mp1 = new HashMap<String, Object>();
+		mp1.put("sno", ss.get(0).getSchool_id());
+		List<Schools> sc = (List<Schools>)commonDao.getDataByMap(mp1, new Schools(), null, null, 0, -1);
+		ss.get(0).setSchool_name(sc.get(0).getSchool_name()+" "+sc.get(0).getBranch());
+		List<Story> st = (List<Story>)commonDao.getDataByMap(map, new Story(), null, null, 0, -1);
+		List<StoryIdea> sti = (List<StoryIdea>)commonDao.getDataByMap(map, new StoryIdea(), null, null, 0, -1);
+		List<AuthorProfileQuestion> apq = (List<AuthorProfileQuestion>)commonDao.getDataByMap(map, new AuthorProfileQuestion(), null, null, 0, -1);
+		List<ProfileQuestionsAnswer> pqa = new ArrayList<ProfileQuestionsAnswer>();
+		if(apq.size() >0) {
+			Map<String,Object> mp = new HashMap<String, Object>();
+			Map<String,Object> mpp = new HashMap<String, Object>();
+			mp.put("apq_id", apq.get(0).getSno());
+			pqa = (List<ProfileQuestionsAnswer>)commonDao.getDataByMap(mp, new ProfileQuestionsAnswer(), null, null, 0, -1);
+			for(ProfileQuestionsAnswer p : pqa) {
+				mpp.put("sno", p.getQuestion_id());
+				List<QuestionList> ql = (List<QuestionList>)commonDao.getDataByMap(mpp, new QuestionList(), null, null, 0, -1);
+				p.setQuestion(ql.get(0).getQuestion());
+			}
+			
+		}
+		List<StructureDescription> sd = new ArrayList<StructureDescription>();
+		List<Structure> str = (List<Structure>)commonDao.getDataByMap(map, new Structure(), null, null, 0, -1);
+		if(str.size() >0) {
+			Map<String,Object> mp = new HashMap<String, Object>();
+			mp.put("structure_id", str.get(0).getSno());
+			sd = (List<StructureDescription>)commonDao.getDataByMap(mp, new StructureDescription(), null, null, 0, -1);
+		}
+		List<Passage> pass = (List<Passage>)commonDao.getDataByMap(map, new Passage(), null, null, 0, -1);
+		List<Reflections> ref = (List<Reflections>)commonDao.getDataByMap(map, new Reflections(), null, null, 0, -1);
+		ModelAndView mv = new ModelAndView("Admin_Panel/StoryData/storyData");
+		mv.addObject("st", st);
+		mv.addObject("sti", sti);
+		mv.addObject("pqa", pqa);
+		mv.addObject("sd", sd);
+		mv.addObject("pass", pass);
+		mv.addObject("ref", ref);
+		mv.addObject("ss", ss);
+		mv.addObject("str", str);
+		return mv;
+	}
+	
 }
